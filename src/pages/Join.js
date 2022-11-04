@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import JaylogPng from "../assets/img/jaylog.png";
+import JaylogPng from "assets/img/jaylog.png";
 // import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 const Join = () => {

@@ -1,14 +1,15 @@
+import ChangeInfo from "pages/ChangeInfo";
+import Error404 from "pages/Error404";
+import InsertPost from "pages/InsertPost";
+import Join from "pages/Join";
+import Login from "pages/Login";
+import My from "pages/My";
+import Post from "pages/Post";
+import Posts from "pages/Posts";
+import UpdatePost from "pages/UpdatePost";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ChangeInfo from "./pages/ChangeInfo";
-import Error404 from "./pages/Error404";
-import InsertPost from "./pages/InsertPost";
-import Join from "./pages/Join";
-import Login from "./pages/Login";
-import My from "./pages/My";
-import Post from "./pages/Post";
-import Posts from "./pages/Posts";
-import UpdatePost from "./pages/UpdatePost";
+
 
 function App() {
   return (

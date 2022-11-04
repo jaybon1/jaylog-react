@@ -1,18 +1,6 @@
-// {
-//     "compilerOptions": {
-//         "baseUrl": ".",
-//         "paths": {
-//             "@/*": ["*"]
-//         }
-//     },
-//     "include": ["src"]
-// }
-
-// {
-//   "compilerOptions": {
-//     "baseUrl": ".",
-//     "paths": {
-//       "@/*": ["./*"]
-//     }
-//   }
-// }
+{
+    "compilerOptions": {
+      "baseUrl": "src"
+    },
+    "includes": ["src"]
+  }
