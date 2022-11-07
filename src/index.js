@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "App";
 import reportWebVitals from "reportWebVitals";
-// import "index.css";
-// import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import "minireset.css";
+import "styles/minireset.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
