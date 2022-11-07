@@ -1,19 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import JaylogPng from "assets/img/jaylog.png";
-// import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import UserInfoLayout from "components/layouts/UserInfoLayout";
+import { useEffect, useRef } from "react";
+import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
-  const refs = useRef({});
+  const refs = useRef({
+    idElement: null,
+    pwElement: null,
+    pw2Element: null,
+    simpleDescElement: null,
+  });
 
   const navigate = useNavigate();
 
@@ -90,72 +87,60 @@ const Join = () => {
   }, []);
 
   return (
-    <section>
-      <Container className="py-5 h-100">
-        <Row className="d-flex justify-content-center align-items-center h-100">
-          <Col className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
-              <Card.Body className="p-5 text-center">
-                <h3 className="mb-3">
-                  <img
-                    src={JaylogPng}
-                    style={{ height: "100px" }}
-                    alt="jaylog"
-                  ></img>
-                </h3>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="idAddOn">*아이디</InputGroup.Text>
-                  <Form.Control
-                    ref={(el) => (refs.current.idElement = el)}
-                    type="text"
-                    aria-describedby="idAddOn"
-                  />
-                </InputGroup>
-                <Row>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text id="pwAddOn">*비밀번호</InputGroup.Text>
-                      <Form.Control
-                        ref={(el) => (refs.current.pwElement = el)}
-                        type="password"
-                        aria-describedby="pwAddOn"
-                      />
-                    </InputGroup>
-                  </Col>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text id="pw2AddOn">*비번확인</InputGroup.Text>
-                      <Form.Control
-                        ref={(el) => (refs.current.pw2Element = el)}
-                        type="password"
-                        aria-describedby="pw2AddOn"
-                      />
-                    </InputGroup>
-                  </Col>
-                </Row>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="simpleDescAddOn">
-                    한 줄 소개
-                  </InputGroup.Text>
-                  <Form.Control
-                    ref={(el) => (refs.current.simpleDescElement = el)}
-                    type="text"
-                    aria-describedby="simpleDescAddOn"
-                  />
-                </InputGroup>
-                <Button
-                  className="btn-primary"
-                  style={{ width: "100%" }}
-                  onClick={requestJoin}
-                >
-                  회원가입
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+    <UserInfoLayout>
+      <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
+        <Card.Body className="p-5 text-center">
+          <h3 className="mb-3">
+            <img src={JaylogPng} style={{ height: "100px" }} alt="jaylog"></img>
+          </h3>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="idAddOn">*아이디</InputGroup.Text>
+            <Form.Control
+              ref={(el) => (refs.current.idElement = el)}
+              type="text"
+              aria-describedby="idAddOn"
+            />
+          </InputGroup>
+          <Row>
+            <Col>
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="pwAddOn">*비밀번호</InputGroup.Text>
+                <Form.Control
+                  ref={(el) => (refs.current.pwElement = el)}
+                  type="password"
+                  aria-describedby="pwAddOn"
+                />
+              </InputGroup>
+            </Col>
+            <Col>
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="pw2AddOn">*비번확인</InputGroup.Text>
+                <Form.Control
+                  ref={(el) => (refs.current.pw2Element = el)}
+                  type="password"
+                  aria-describedby="pw2AddOn"
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="simpleDescAddOn">한 줄 소개</InputGroup.Text>
+            <Form.Control
+              ref={(el) => (refs.current.simpleDescElement = el)}
+              type="text"
+              aria-describedby="simpleDescAddOn"
+            />
+          </InputGroup>
+          <Button
+            className="btn-primary"
+            style={{ width: "100%" }}
+            onClick={requestJoin}
+          >
+            회원가입
+          </Button>
+        </Card.Body>
+      </Card>
+    </UserInfoLayout>
   );
 };
 

@@ -1,15 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
 import JaylogPng from "assets/img/jaylog.png";
+import UserInfoLayout from "components/layouts/UserInfoLayout";
+import { useEffect, useRef } from "react";
+import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const refs = useRef({
@@ -118,64 +111,52 @@ const Login = () => {
   }, []);
 
   return (
-    <section style={{ backgroundColor: "#508bfc", minHeight: "100vh" }}>
-      <Container className="py-5 h-100">
-        <Row className="d-flex justify-content-center align-items-center h-100">
-          <Col className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
-              <Card.Body className="p-5 text-center">
-                <h3 className="mb-3">
-                  <img
-                    src={JaylogPng}
-                    style={{ height: "100px" }}
-                    alt="jaylog"
-                  ></img>
-                </h3>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="idAddOn">
-                    &nbsp;아이디 &nbsp;
-                  </InputGroup.Text>
-                  <Form.Control
-                    ref={(el) => (refs.current.idElement = el)}
-                    type="text"
-                    aria-describedby="idAddOn"
-                  />
-                </InputGroup>
-                <Row>
-                  <Col>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text id="idAddOn">비밀번호</InputGroup.Text>
-                      <Form.Control
-                        ref={(el) => (refs.current.pwElement = el)}
-                        type="password"
-                        onKeyUp={enterKeyLogin}
-                      />
-                    </InputGroup>
-                  </Col>
-                </Row>
-                <Form.Group className="d-flex justify-content-start mb-4">
-                  <Form.Check
-                    type="checkbox"
-                    ref={(el) => (refs.current.rememberMeElement = el)}
-                    label="아이디 기억하기"
-                  ></Form.Check>
-                </Form.Group>
-                <Button
-                  className="btn-primary"
-                  type="button"
-                  style={{ width: "100%" }}
-                  onClick={requestLogin}
-                >
-                  로그인
-                </Button>
-                <hr className="my-4" />
-                <Link to="/join">아이디가 없으신가요? 회원가입</Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+    <UserInfoLayout>
+      <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
+        <Card.Body className="p-5 text-center">
+          <h3 className="mb-3">
+            <img src={JaylogPng} style={{ height: "100px" }} alt="jaylog"></img>
+          </h3>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="idAddOn">&nbsp;아이디 &nbsp;</InputGroup.Text>
+            <Form.Control
+              ref={(el) => (refs.current.idElement = el)}
+              type="text"
+              aria-describedby="idAddOn"
+            />
+          </InputGroup>
+          <Row>
+            <Col>
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="idAddOn">비밀번호</InputGroup.Text>
+                <Form.Control
+                  ref={(el) => (refs.current.pwElement = el)}
+                  type="password"
+                  onKeyUp={enterKeyLogin}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
+          <Form.Group className="d-flex justify-content-start mb-4">
+            <Form.Check
+              type="checkbox"
+              ref={(el) => (refs.current.rememberMeElement = el)}
+              label="아이디 기억하기"
+            ></Form.Check>
+          </Form.Group>
+          <Button
+            className="btn-primary"
+            type="button"
+            style={{ width: "100%" }}
+            onClick={requestLogin}
+          >
+            로그인
+          </Button>
+          <hr className="my-4" />
+          <Link to="/join">아이디가 없으신가요? 회원가입</Link>
+        </Card.Body>
+      </Card>
+    </UserInfoLayout>
   );
 };
 
