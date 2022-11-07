@@ -1,10 +1,22 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import JaylogPng from "assets/img/jaylog.png";
 
 const Login = () => {
-  const refs = useRef({});
+  const refs = useRef({
+    idElement: null,
+    pwElement: null,
+    rememberMeElement: null,
+  });
 
   const navigate = useNavigate();
 
@@ -106,7 +118,7 @@ const Login = () => {
   }, []);
 
   return (
-    <section>
+    <section style={{ backgroundColor: "#508bfc", minHeight: "100vh" }}>
       <Container className="py-5 h-100">
         <Row className="d-flex justify-content-center align-items-center h-100">
           <Col className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -119,23 +131,26 @@ const Login = () => {
                     alt="jaylog"
                   ></img>
                 </h3>
-                <Form.Group className=" mb-4">
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="idAddOn">
+                    &nbsp;아이디 &nbsp;
+                  </InputGroup.Text>
                   <Form.Control
                     ref={(el) => (refs.current.idElement = el)}
                     type="text"
-                    placeholder="아이디"
+                    aria-describedby="idAddOn"
                   />
-                </Form.Group>
+                </InputGroup>
                 <Row>
                   <Col>
-                    <Form.Group className=" mb-4">
+                    <InputGroup className="mb-3">
+                      <InputGroup.Text id="idAddOn">비밀번호</InputGroup.Text>
                       <Form.Control
                         ref={(el) => (refs.current.pwElement = el)}
                         type="password"
-                        placeholder="비밀번호"
                         onKeyUp={enterKeyLogin}
                       />
-                    </Form.Group>
+                    </InputGroup>
                   </Col>
                 </Row>
                 <Form.Group className="d-flex justify-content-start mb-4">
@@ -146,7 +161,9 @@ const Login = () => {
                   ></Form.Check>
                 </Form.Group>
                 <Button
-                  className="btn-primary btn-lg btn-block"
+                  className="btn-primary"
+                  type="button"
+                  style={{ width: "100%" }}
                   onClick={requestLogin}
                 >
                   로그인

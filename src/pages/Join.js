@@ -1,5 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import JaylogPng from "assets/img/jaylog.png";
 // import "mdb-react-ui-kit/dist/css/mdb.min.css";
@@ -95,42 +103,49 @@ const Join = () => {
                     alt="jaylog"
                   ></img>
                 </h3>
-                <Form.Group className=" mb-4">
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="idAddOn">*아이디</InputGroup.Text>
                   <Form.Control
                     ref={(el) => (refs.current.idElement = el)}
                     type="text"
-                    placeholder="* 아이디"
+                    aria-describedby="idAddOn"
                   />
-                </Form.Group>
+                </InputGroup>
                 <Row>
                   <Col>
-                    <Form.Group className=" mb-4">
+                    <InputGroup className="mb-3">
+                      <InputGroup.Text id="pwAddOn">*비밀번호</InputGroup.Text>
                       <Form.Control
                         ref={(el) => (refs.current.pwElement = el)}
                         type="password"
-                        placeholder="* 비밀번호"
+                        aria-describedby="pwAddOn"
                       />
-                    </Form.Group>
+                    </InputGroup>
                   </Col>
                   <Col>
-                    <Form.Group className=" mb-4">
+                    <InputGroup className="mb-3">
+                      <InputGroup.Text id="pw2AddOn">*비번확인</InputGroup.Text>
                       <Form.Control
                         ref={(el) => (refs.current.pw2Element = el)}
                         type="password"
-                        placeholder="* 비밀번호 확인"
+                        aria-describedby="pw2AddOn"
                       />
-                    </Form.Group>
+                    </InputGroup>
                   </Col>
                 </Row>
-                <Form.Group className=" mb-4">
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="simpleDescAddOn">
+                    한 줄 소개
+                  </InputGroup.Text>
                   <Form.Control
                     ref={(el) => (refs.current.simpleDescElement = el)}
                     type="text"
-                    placeholder="한줄 소개"
+                    aria-describedby="simpleDescAddOn"
                   />
-                </Form.Group>
+                </InputGroup>
                 <Button
-                  className="btn-primary btn-lg btn-block"
+                  className="btn-primary"
+                  style={{ width: "100%" }}
                   onClick={requestJoin}
                 >
                   회원가입
