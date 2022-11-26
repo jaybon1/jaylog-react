@@ -1,4 +1,4 @@
-import JaylogPng from "assets/img/jaylog.png";
+import JaylogImg from "assets/img/jaylog.png";
 import UserInfoLayout from "components/layouts/UserInfoLayout";
 import { useEffect, useRef } from "react";
 import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
@@ -55,7 +55,7 @@ const Login = () => {
       return;
     }
 
-    // 로그인 성공
+    // 로그인 처리
 
     if (rememberMeElement.checked) {
       localStorage.setItem("rememberId", JSON.stringify(user.id));
@@ -111,11 +111,11 @@ const Login = () => {
   }, []);
 
   return (
-    <UserInfoLayout>
+    <UserInfoLayout isNavbar={true}>
       <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
         <Card.Body className="p-5 text-center">
           <h3 className="mb-3">
-            <img src={JaylogPng} style={{ height: "100px" }} alt="jaylog"></img>
+            <img src={JaylogImg} style={{ height: "100px" }} alt="jaylog"></img>
           </h3>
           <InputGroup className="mb-3">
             <InputGroup.Text id="idAddOn">&nbsp;아이디 &nbsp;</InputGroup.Text>

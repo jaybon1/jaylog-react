@@ -1,8 +1,10 @@
-import JaylogPng from "assets/img/jaylog.png";
+import JaylogImg from "assets/img/jaylog.png";
 import UserInfoLayout from "components/layouts/UserInfoLayout";
 import { useEffect, useRef } from "react";
 import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 const Join = () => {
   const refs = useRef({
@@ -37,14 +39,23 @@ const Join = () => {
       simpleDesc: refs.current.simpleDescElement.value,
       profileImg:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      createDate: new Date().toJSON(),
-      updateDate: new Date().toJSON(),
+      createDate: new Date(),
+      updateDate: new Date(),
       deleteDate: null,
     };
 
-    userList.push(user);
-
-    localStorage.setItem("userList", JSON.stringify(userList));
+    axios({
+      method: `post`,
+      url: `https://1cd2b6f5-23fd-4bfa-a92b-c0876b941f1c.mock.pstmn.io/join`,
+      data: user,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
 
     alert("회원가입이 완료되었습니다.");
 
@@ -87,11 +98,11 @@ const Join = () => {
   }, []);
 
   return (
-    <UserInfoLayout>
+    <UserInfoLayout isNavbar={false}>
       <Card className="shadow-2-strong" style={{ borderRadius: "1rem" }}>
         <Card.Body className="p-5 text-center">
           <h3 className="mb-3">
-            <img src={JaylogPng} style={{ height: "100px" }} alt="jaylog"></img>
+            <img src={JaylogImg} style={{ height: "100px" }} alt="jaylog"></img>
           </h3>
           <InputGroup className="mb-3">
             <InputGroup.Text id="idAddOn">*아이디</InputGroup.Text>
