@@ -3,7 +3,7 @@ import React from "react";
 
 const CommonLayout = ({ children, isNavbar }) => {
   return (
-    <div>
+    <div className="bg-light" style={{ minHeight: "100vh" }}>
       {isNavbar ? <MyNavbar /> : null}
       {children}
     </div>

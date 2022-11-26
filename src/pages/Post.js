@@ -1,8 +1,7 @@
-import CommonLayout from "components/layouts/CommonLayout";
-import React from "react";
-import { Button, Container, Image } from "react-bootstrap";
-import LikeImg from "assets/img/like.svg";
 import { Viewer } from "@toast-ui/react-editor";
+import LikeImg from "assets/img/like.svg";
+import CommonLayout from "components/layouts/CommonLayout";
+import { Button, Container, Image } from "react-bootstrap";
 
 const Post = () => {
   return (
