@@ -1,18 +1,16 @@
-import CommonLayout from "components/layouts/CommonLayout";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
-import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Editor } from "@toast-ui/react-editor";
 import ExitImg from "assets/img/exit.svg";
+import CommonLayout from "components/layouts/CommonLayout";
+import { useEffect, useRef, useState } from "react";
+import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const InsertPost = () => {
   const refs = useRef({
     /** @type Editor editor */
     editor: null,
   });
-
-  const a = "";
 
   const [editorHeight, setEditorHeight] = useState(0);
 
