@@ -40,7 +40,7 @@ const Login = () => {
             localStorage.removeItem("rememberId");
           }
 
-          localStorage.setItem("accessToken", response.data.data.accessToken);
+          localStorage.setItem("accessToken", response.data.content.accessToken);
 
           navigate("/");
         } else {
