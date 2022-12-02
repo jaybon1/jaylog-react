@@ -1,6 +1,8 @@
 import LogoImg from "assets/img/jaylog.png";
 import SearchImg from "assets/img/search.png";
 import UserImg from "assets/img/user.png";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
 import {
   Anchor,
   Button,
@@ -18,6 +20,22 @@ import { Link, useNavigate } from "react-router-dom";
 const MyNavbar = () => {
   const navigate = useNavigate();
 
+  const [isLogin, setIsLogin] = useState(false);
+
+  const temp = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      try {
+        jwtDecode(accessToken);
+        setIsLogin(true);
+      } catch (e) {}
+    }
+  };
+
+  useEffect(() => {
+    temp();
+  }, []);
+
   return (
     <div
       className="sticky-top shadow"
@@ -29,7 +47,7 @@ const MyNavbar = () => {
             <Image src={LogoImg} style={{ height: "50px" }} />
           </Link>
           <Form className="d-none d-sm-none d-md-flex">
-            <Form.Control type="text" placeholder="search" />
+            <Form.Control type="text" placeholder="미구현" />
             <button className="btn" type="button">
               <Image src={SearchImg} width={"20"} />
             </button>
@@ -37,15 +55,7 @@ const MyNavbar = () => {
           <div>
             <InputGroup>
               <div>
-                {false ? (
-                  <Button
-                    className="rounded-pill btn-dark px-3"
-                    type="button"
-                    onClick={() => navigate("/login")}
-                  >
-                    로그인
-                  </Button>
-                ) : (
+                {isLogin ? (
                   <Button
                     className="rounded-pill btn-dark px-3"
                     type="button"
@@ -53,10 +63,18 @@ const MyNavbar = () => {
                   >
                     새 글 작성
                   </Button>
+                ) : (
+                  <Button
+                    className="rounded-pill btn-dark px-3"
+                    type="button"
+                    onClick={() => navigate("/login")}
+                  >
+                    로그인
+                  </Button>
                 )}
               </div>
               <Row className="align-content-center ms-3">
-                {true ? (
+                {isLogin ? (
                   <NavDropdown title={<Image src={UserImg} width="25" />}>
                     <div className="dropdown-item d-md-none">
                       <Form className="d-flex">
@@ -74,7 +92,8 @@ const MyNavbar = () => {
                     <Anchor
                       href="#"
                       onClick={() => {
-                        alert("로그아웃");
+                        localStorage.removeItem("accessToken");
+                        setIsLogin(false);
                         navigate("/");
                       }}
                       className="dropdown-item"

@@ -4,7 +4,7 @@ import NoimageImg from "assets/img/no-image.png";
 import LikeImg from "assets/img/like.svg";
 import { useNavigate } from "react-router-dom";
 
-const MyCard = ({ item }) => {
+const MyCard = ({ post }) => {
   const navigate = useNavigate();
 
   /** @type React.CSSProperties jaybonCardContainer */
@@ -38,49 +38,56 @@ const MyCard = ({ item }) => {
     };
   }, []);
 
+  /** @type React.CSSProperties jaybonCardText */
+  const jaybonTitle = useMemo(() => {
+    return {
+      cursor: "pointer",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+    };
+  }, []);
+
   return (
     <Col>
       <Card className="m-3">
         <div style={jaybonCardContainer}>
           <Card.Img
             variant="top"
-            src={NoimageImg}
+            src={post.thumbnail ? post.thumbnail : NoimageImg}
             style={jaybonCardImg}
             alt="..."
           />
         </div>
         <Card.Body>
           <Card.Title
-            onClick={() => navigate(`/post/${item}`)}
-            style={{ cursor: "pointer" }}
+            onClick={() => navigate(`/post/${post.idx}`)}
+            style={jaybonTitle}
           >
-            {"Card Title" + String(item)}
+            {post.title}
           </Card.Title>
-          <Card.Text style={jaybonCardText}>
-            {"Some quick example text to build on the card title and makeup the bulk of the card's content.Some quick example text to build on the card title and makeup the bulk of the card's content." +
-              item}
-          </Card.Text>
-          <small className="text-muted">2022-11-03</small>
+          <Card.Text style={jaybonCardText}>{post.summary}</Card.Text>
+          <small className="text-muted">{post.createDate}</small>
         </Card.Body>
         <Card.Footer>
           <Row>
             <Col>
               <InputGroup>
                 <Image
-                  src={
-                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                  }
+                  src={post.user.profileImage}
                   alt="profile"
                   className="ratio ratio-1x1 rounded-circle me-2"
                   style={{ width: "24px", height: "24px" }}
                 />
-                <strong>작성자</strong>
+                <strong>{post.user.id}</strong>
               </InputGroup>
             </Col>
             <Col className="col-auto">
               <InputGroup>
                 <Image src={LikeImg} width="15" />
-                <span className="mx-2 fs-6 text-black-50 fw-light">0</span>
+                <span className="mx-2 fs-6 text-black-50 fw-light">
+                  {post.likeCount}
+                </span>
               </InputGroup>
             </Col>
           </Row>
