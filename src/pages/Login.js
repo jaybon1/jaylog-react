@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 const Login = () => {
   const refs = useRef({
     idElement: null,
@@ -20,59 +22,40 @@ const Login = () => {
 
     const { idElement, pwElement, rememberMeElement } = refs.current;
 
-    const userList = JSON.parse(localStorage.getItem("userList"));
-
-    if (userList === null) {
-      alert("아이디가 존재하지 않습니다.");
-      idElement.value = "";
-      pwElement.value = "";
-      idElement.focus();
-      return;
-    }
-
-    const user = userList.find((user) => user.id === idElement.value);
-
-    if (user === undefined) {
-      alert("해당 아이디가 존재하지 않습니다.");
-      idElement.value = "";
-      pwElement.value = "";
-      idElement.focus();
-      return;
-    }
-
-    if (user.pw !== pwElement.value) {
-      alert("비밀번호가 일치하지 않습니다.");
-      pwElement.value = "";
-      pwElement.focus();
-      return;
-    }
-
-    if (user.deleteDate !== null) {
-      alert("탈퇴한 회원입니다.");
-      idElement.value = "";
-      pwElement.value = "";
-      idElement.focus();
-      return;
-    }
-
-    // 로그인 처리
-
-    if (rememberMeElement.checked) {
-      localStorage.setItem("rememberId", JSON.stringify(user.id));
-    } else {
-      localStorage.removeItem("rememberId");
-    }
-
     const loginUser = {
-      idx: user.idx,
-      id: user.id,
-      profileImg: user.profileImg,
-      simpleDesc: user.simpleDesc,
+      id: idElement.value,
+      password: pwElement.value,
     };
 
-    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+    axios({
+      method: `post`,
+      url: `http://localhost:8000/login`,
+      data: loginUser,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          if (rememberMeElement.checked) {
+            localStorage.setItem("rememberId", JSON.stringify(idElement.value));
+          } else {
+            localStorage.removeItem("rememberId");
+          }
 
-    navigate("/");
+          localStorage.setItem("accessToken", response.data.data.accessToken);
+
+          navigate("/");
+        } else {
+          alert(response.data.message);
+        }
+      })
+      .catch((error) => {
+        const detail = error?.response?.data?.detail;
+        if (detail != null) {
+          alert(JSON.stringify(detail));
+        } else {
+          alert("오류가 발생했습니다. 관리자에게 문의하세요.");
+        }
+      })
+      .finally(() => {});
   };
 
   const enterKeyLogin = (event) => {

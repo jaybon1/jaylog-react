@@ -21,45 +21,35 @@ const Join = () => {
       return;
     }
 
-    if (localStorage.getItem("userList") === null) {
-      localStorage.setItem("userList", JSON.stringify([]));
-    }
-
-    const userList = JSON.parse(localStorage.getItem("userList"));
-
-    if (userList.some((user) => user.id === refs.current.idElement.value)) {
-      alert("이미 존재하는 아이디입니다.");
-      return;
-    }
-
     const user = {
-      idx: userList.length + 1,
       id: refs.current.idElement.value,
-      pw: refs.current.pwElement.value,
+      password: refs.current.pwElement.value,
       simpleDesc: refs.current.simpleDescElement.value,
-      profileImg:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-      createDate: new Date(),
-      updateDate: new Date(),
-      deleteDate: null,
     };
 
     axios({
       method: `post`,
-      url: `https://1cd2b6f5-23fd-4bfa-a92b-c0876b941f1c.mock.pstmn.io/join`,
+      url: `http://localhost:8000/join`,
       data: user,
     })
       .then((response) => {
-        console.log(response);
+        if (response.status === 201) {
+          alert("회원가입이 완료되었습니다.");
+
+          navigate("/login");
+        } else {
+          alert(response.data.message);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        const detail = error?.response?.data?.detail;
+        if (detail != null) {
+          alert(JSON.stringify(detail));
+        } else {
+          alert("오류가 발생했습니다. 관리자에게 문의하세요.");
+        }
       })
       .finally(() => {});
-
-    alert("회원가입이 완료되었습니다.");
-
-    navigate("/login");
   };
 
   const validateFields = () => {
